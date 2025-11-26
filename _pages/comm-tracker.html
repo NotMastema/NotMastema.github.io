@@ -157,11 +157,19 @@ permalink: /comm-tracker/
             return hash === CORRECT_PASSWORD_HASH;
         }
 
-        // Check if already authenticated (session storage)
-        if (sessionStorage.getItem('comm-tracker-authenticated') === 'true') {
+        // Check if already authenticated (session storage with time limit)
+        const authToken = sessionStorage.getItem('comm-tracker-auth-token');
+        const authTime = sessionStorage.getItem('comm-tracker-auth-time');
+        const MAX_SESSION_TIME = 8 * 60 * 60 * 1000; // 8 hours
+
+        if (authToken && authTime && (Date.now() - parseInt(authTime)) < MAX_SESSION_TIME) {
             document.getElementById('password-screen').style.display = 'none';
             document.getElementById('protected-content').style.display = 'block';
             document.getElementById('tracker-frame').src = '/comm-tracker-app/index.html';
+        } else {
+            // Clear expired auth
+            sessionStorage.removeItem('comm-tracker-auth-token');
+            sessionStorage.removeItem('comm-tracker-auth-time');
         }
 
         document.getElementById('password-form').addEventListener('submit', async function(e) {
@@ -171,8 +179,10 @@ permalink: /comm-tracker/
             const isCorrect = await checkPassword(password);
 
             if (isCorrect) {
-                // Store authentication in session storage
-                sessionStorage.setItem('comm-tracker-authenticated', 'true');
+                // Generate a unique token with timestamp for this session
+                const authToken = btoa(Date.now() + ':' + Math.random().toString(36));
+                sessionStorage.setItem('comm-tracker-auth-token', authToken);
+                sessionStorage.setItem('comm-tracker-auth-time', Date.now().toString());
 
                 // Hide password screen and show content
                 document.getElementById('password-screen').style.display = 'none';
