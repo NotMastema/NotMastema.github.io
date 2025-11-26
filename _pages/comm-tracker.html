@@ -1,5 +1,5 @@
 ---
-layout: none
+layout: null
 permalink: /comm-tracker/
 ---
 <!DOCTYPE html>
@@ -108,7 +108,7 @@ permalink: /comm-tracker/
 </head>
 <body>
     <!-- Password Protection Screen -->
-    <div id="password-screen" class="password-screen">
+    <div id="password-screen" class="password-screen" style="display: flex;">
         <div class="password-container">
             <div class="lock-icon">🔒</div>
             <h1>Protected Page</h1>
@@ -129,10 +129,10 @@ permalink: /comm-tracker/
     </div>
 
     <!-- Protected Content (Commission Tracker) -->
-    <div id="protected-content">
+    <div id="protected-content" style="display: none;">
         <iframe
             id="tracker-frame"
-            src="/comm-tracker-app/index.html"
+            src="about:blank"
             style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; border: none;"
         ></iframe>
     </div>
@@ -161,6 +161,7 @@ permalink: /comm-tracker/
         if (sessionStorage.getItem('comm-tracker-authenticated') === 'true') {
             document.getElementById('password-screen').style.display = 'none';
             document.getElementById('protected-content').style.display = 'block';
+            document.getElementById('tracker-frame').src = '/comm-tracker-app/index.html';
         }
 
         document.getElementById('password-form').addEventListener('submit', async function(e) {
@@ -176,6 +177,7 @@ permalink: /comm-tracker/
                 // Hide password screen and show content
                 document.getElementById('password-screen').style.display = 'none';
                 document.getElementById('protected-content').style.display = 'block';
+                document.getElementById('tracker-frame').src = '/comm-tracker-app/index.html';
                 document.getElementById('error-message').classList.remove('show');
             } else {
                 // Show error message
