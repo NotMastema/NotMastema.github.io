@@ -3,11 +3,11 @@ layout: home
 author_profile: true
 ---
 
-Welcome to my personal website! This site is built using the [Minimal Mistakes](https://github.com/mmistakes/minimal-mistakes) Jekyll theme.
+Welcome!
 
 ## About Me
 
-Add information about yourself here.
+I am Rafael. I work in tech and spend most of my free time with my dogs Zeus and Odin, playing guitar, taking care of my plants, trying new hardware setups, or gaming. I like learning, building, and experimenting. This site is a place for my projects, notes, and whatever else I feel like sharing.
 
 ## Recent Posts
 
