@@ -520,47 +520,8 @@
         // It will look like: https://script.google.com/macros/s/YOUR_SCRIPT_ID/exec
         const GOOGLE_APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzzGs5fEx1ko33yot_9Q7kO55nK-XE7w_huQAOLLclI0QY2AnP12MorOlQkS6xpW8p3VQ/exec';
 
-        // Fallback deals in case the Google Apps Script fails or isn't configured yet
-        const fallbackDeals = [
-            {id: 1, name: "Brian Shisler", close: "2025-07-01", subscription: 100, setup: 250, cycle: "monthly", churnDate: null},
-            {id: 2, name: "Kelly Solberg", close: "2025-07-01", subscription: 1200, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 3, name: "Scott Armstrong", close: "2025-07-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 4, name: "Aline Roy", close: "2025-07-01", subscription: 150, setup: 250, cycle: "monthly", churnDate: null},
-            {id: 5, name: "Julie Brown", close: "2025-07-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 6, name: "Grady Rohn", close: "2025-07-01", subscription: 1200, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 7, name: "Mary Beth Grasso", close: "2025-07-01", subscription: 900, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 8, name: "Avery Meizner", close: "2025-07-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 9, name: "Aaron Rose", close: "2025-08-01", subscription: 1200, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 10, name: "Scott Gaetner", close: "2025-08-01", subscription: 100, setup: 250, cycle: "monthly", churnDate: null},
-            {id: 11, name: "Willie Adolph", close: "2025-08-01", subscription: 600, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 12, name: "Kelly Calkins Roberts", close: "2025-08-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 13, name: "Barbara Wiedman", close: "2025-08-01", subscription: 900, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 14, name: "Sonia Silva", close: "2025-08-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 15, name: "Roz Rogers", close: "2025-08-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 16, name: "Jim Crotwell", close: "2025-08-01", subscription: 600, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 17, name: "John Major", close: "2025-08-01", subscription: 100, setup: 250, cycle: "monthly", churnDate: null},
-            {id: 18, name: "Phillip Vaughan", close: "2025-08-01", subscription: 100, setup: 250, cycle: "monthly", churnDate: null},
-            {id: 19, name: "Erin Stevens", close: "2025-09-01", subscription: 1200, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 20, name: "Joseph Spurlock", close: "2025-09-01", subscription: 600, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 21, name: "Davian Akers", close: "2025-09-01", subscription: 1200, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 22, name: "Nancy Quiroz", close: "2025-09-01", subscription: 1200, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 23, name: "Sarah Clear", close: "2025-09-01", subscription: 600, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 24, name: "Jonathan Meek", close: "2025-10-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 25, name: "CJ Singh", close: "2025-10-01", subscription: 600, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 26, name: "Ann Kraase", close: "2025-10-01", subscription: 1800, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 27, name: "Laura Miller Edwards", close: "2025-10-01", subscription: 120, setup: 0, cycle: "monthly", churnDate: null},
-            {id: 28, name: "Cheryl Glynn", close: "2025-10-01", subscription: 80, setup: 0, cycle: "monthly", churnDate: null},
-            {id: 29, name: "Robert Zahn", close: "2025-10-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 30, name: "Emmett Carr", close: "2025-10-01", subscription: 120, setup: 0, cycle: "monthly", churnDate: null},
-            {id: 31, name: "Lisa Treu", close: "2025-10-01", subscription: 1200, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 32, name: "Patrick Higgins", close: "2025-10-01", subscription: 900, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 33, name: "Helena Gentila", close: "2025-11-01", subscription: 900, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 34, name: "Cyndee Haydon", close: "2025-11-01", subscription: 900, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 35, name: "Seb Ebrahimi", close: "2025-11-01", subscription: 900, setup: 0, cycle: "six-month", churnDate: null},
-            {id: 36, name: "Jason Gracey", close: "2025-11-01", subscription: 1800, setup: 0, cycle: "yearly", churnDate: null},
-            {id: 37, name: "Tass Fry", close: "2025-11-01", subscription: 600, setup: 100, cycle: "six-month", churnDate: null},
-            {id: 38, name: "Lisa Forss", close: "2025-11-01", subscription: 6480, setup: 0, cycle: "two-year", churnDate: null}
-        ];
+        // No fallback data for security - data must be loaded from Google Sheets
+        const fallbackDeals = [];
         
         const CommissionTracker = () => {
             const [deals, setDeals] = useState([]);
