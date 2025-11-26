@@ -5,11 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rejig Commission Tracker</title>
     <script>
-        // Redirect if accessed directly (not through password-protected page)
-        if (window.self === window.top) {
-            // Not in an iframe, redirect to password page
-            window.location.href = '/comm-tracker/';
-        }
+        // Password protection: Check authentication before allowing access
+        (function() {
+            const isAuthenticated = sessionStorage.getItem('comm-tracker-authenticated') === 'true';
+            const isInIframe = window.self !== window.top;
+
+            // If not authenticated OR not in iframe, redirect to password page
+            if (!isAuthenticated || !isInIframe) {
+                window.location.href = '/comm-tracker/';
+            } else {
+                // Authentication verified, show content
+                document.addEventListener('DOMContentLoaded', function() {
+                    document.body.classList.add('authenticated');
+                });
+            }
+        })();
     </script>
     <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -21,6 +31,11 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             padding: 30px;
             min-height: 100vh;
+            /* Hide content by default until authentication is verified */
+            visibility: hidden;
+        }
+        body.authenticated {
+            visibility: visible;
         }
         .container {
             max-width: 1200px;
