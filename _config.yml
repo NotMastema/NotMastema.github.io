@@ -59,6 +59,7 @@ footer:
 include:
   - .htaccess
   - _pages
+  - comm-tracker-app
 exclude:
   - "*.sublime-project"
   - "*.sublime-workspace"
