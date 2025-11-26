@@ -7,7 +7,7 @@
 
 # Theme Settings
 remote_theme: mmistakes/minimal-mistakes@4.26.2
-minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale: "en-US"
@@ -29,7 +29,7 @@ words_per_minute: 200
 author:
   name: "Rafa"
   avatar: "/assets/images/IMG_0201.jpg"
-  bio: "I am Rafael. I work in tech and spend most of my free time with my dogs Zeus and Odin, playing guitar, taking care of my plants, trying new hardware setups, or gaming. I like learning, building, and experimenting. This site is a place for my projects, notes, and whatever else I feel like sharing."
+  bio: "Just another plant hoarding, gadget tinkering, guitar attempting, tattooed and always curious human wandering the internet"
   location: "Somewhere"
   links:
     - label: "Gmail"
