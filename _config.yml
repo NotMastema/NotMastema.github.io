@@ -28,7 +28,7 @@ words_per_minute: 200
 # Site Author
 author:
   name: "Your Name"
-  avatar: # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar: "/assets/images/IMG_0201.jpg"
   bio: "I am a **developer** and this is my personal site."
   location: "Somewhere"
   links:
