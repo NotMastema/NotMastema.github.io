@@ -54,6 +54,9 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/NotMastema"
+    - label: "Commission Tracker"
+      icon: "fas fa-fw fa-lock"
+      url: "/comm-tracker/"
 
 # Reading Files
 include:
