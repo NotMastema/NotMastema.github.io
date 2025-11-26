@@ -157,12 +157,26 @@ permalink: /comm-tracker/
             return hash === CORRECT_PASSWORD_HASH;
         }
 
+        const MAX_SESSION_TIME = 8 * 60 * 60 * 1000; // 8 hours
+
+        function setAuthCookie() {
+            const maxAgeSeconds = MAX_SESSION_TIME / 1000;
+            document.cookie = `comm_tracker_auth=1;path=/;max-age=${maxAgeSeconds};SameSite=Lax`;
+        }
+
+        function clearAuthCookie() {
+            document.cookie = 'comm_tracker_auth=;Max-Age=0;path=/;SameSite=Lax';
+        }
+
+        function hasAuthCookie() {
+            return document.cookie.split(';').some(c => c.trim().startsWith('comm_tracker_auth='));
+        }
+
         // Check if already authenticated (session storage with time limit)
         const authToken = sessionStorage.getItem('comm-tracker-auth-token');
         const authTime = sessionStorage.getItem('comm-tracker-auth-time');
-        const MAX_SESSION_TIME = 8 * 60 * 60 * 1000; // 8 hours
 
-        if (authToken && authTime && (Date.now() - parseInt(authTime)) < MAX_SESSION_TIME) {
+        if (authToken && authTime && (Date.now() - parseInt(authTime, 10)) < MAX_SESSION_TIME && hasAuthCookie()) {
             document.getElementById('password-screen').style.display = 'none';
             document.getElementById('protected-content').style.display = 'block';
             document.getElementById('tracker-frame').src = '/comm-tracker-app/index.html';
@@ -170,6 +184,7 @@ permalink: /comm-tracker/
             // Clear expired auth
             sessionStorage.removeItem('comm-tracker-auth-token');
             sessionStorage.removeItem('comm-tracker-auth-time');
+            clearAuthCookie();
         }
 
         document.getElementById('password-form').addEventListener('submit', async function(e) {
@@ -183,6 +198,7 @@ permalink: /comm-tracker/
                 const authToken = btoa(Date.now() + ':' + Math.random().toString(36));
                 sessionStorage.setItem('comm-tracker-auth-token', authToken);
                 sessionStorage.setItem('comm-tracker-auth-time', Date.now().toString());
+                setAuthCookie();
 
                 // Hide password screen and show content
                 document.getElementById('password-screen').style.display = 'none';
