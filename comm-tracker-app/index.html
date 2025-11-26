@@ -10,42 +10,49 @@
         (function() {
             'use strict';
 
-            // Layer 1: Check authentication token and timestamp
             const authToken = sessionStorage.getItem('comm-tracker-auth-token');
             const authTime = sessionStorage.getItem('comm-tracker-auth-time');
             const MAX_SESSION_TIME = 8 * 60 * 60 * 1000; // 8 hours
 
-            const hasValidToken = authToken && authTime &&
-                                  (Date.now() - parseInt(authTime)) < MAX_SESSION_TIME;
-
-            // Layer 2: Must be loaded in an iframe
+            const hasValidToken = Boolean(authToken && authTime && (Date.now() - parseInt(authTime, 10)) < MAX_SESSION_TIME);
             const isInIframe = window.self !== window.top;
+            const hasValidReferrer = document.referrer.includes('/comm-tracker/');
 
-            // Layer 3: Check referrer
-            const hasValidReferrer = document.referrer === '' ||
-                                    document.referrer.includes('/comm-tracker/');
+            const isAuthorized = hasValidToken && isInIframe && hasValidReferrer;
 
-            // BLOCK ACCESS if any check fails
-            if (!hasValidToken || !isInIframe) {
-                // Immediately redirect - don't wait for anything
-                window.location.replace('/comm-tracker/');
-                // Block all further script execution
+            document.documentElement.classList.add(isAuthorized ? 'authorized' : 'unauthorized');
+
+            // Block access as early as possible if any check fails
+            if (!isAuthorized) {
+                const lockCss = `body {margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);} .auth-locked{display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;background:white;padding:32px;border-radius:16px;box-shadow:0 12px 32px rgba(0,0,0,.2);max-width:420px;text-align:center;} .auth-locked h1{font-size:22px;color:#2d3748;} .auth-locked p{color:#718096;font-size:15px;line-height:1.5;} .auth-locked a{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);color:white;text-decoration:none;border-radius:10px;font-weight:600;box-shadow:0 8px 24px rgba(102,126,234,.25);} .auth-locked .note{font-size:13px;color:#4a5568;opacity:0.9;}`;
+                const lockHtml = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><style>${lockCss}</style></head><body><div class="auth-locked"><h1>Access is locked</h1><p>You need to use the password portal to open the tracker. Return to the login page and enter the password again.</p><a href="/comm-tracker/">Go to login</a><p class="note">If you keep seeing this screen, clear session storage or restart your browser.</p></div></body></html>`;
+
+                // Replace the document immediately so nothing else renders
+                document.open();
+                document.write(lockHtml);
+                document.close();
+
+                // Force navigation back to the portal
+                setTimeout(function() { window.location.replace('/comm-tracker/'); }, 150);
                 throw new Error('Unauthorized access');
             }
 
-            // If we get here, authentication passed - allow content to show
             document.addEventListener('DOMContentLoaded', function() {
                 document.body.classList.add('authenticated');
-                // Remove the meta refresh since we're authenticated
                 const metaRefresh = document.querySelector('meta[http-equiv="refresh"]');
                 if (metaRefresh) metaRefresh.remove();
+
+                const appShell = document.getElementById('app-shell');
+                const lockMessage = document.getElementById('auth-locked');
+                if (appShell) appShell.style.display = 'block';
+                if (lockMessage) lockMessage.style.display = 'none';
             });
 
-            // Continuous verification - check every 30 seconds
             setInterval(function() {
                 const token = sessionStorage.getItem('comm-tracker-auth-token');
                 const time = sessionStorage.getItem('comm-tracker-auth-time');
-                if (!token || !time || (Date.now() - parseInt(time)) > MAX_SESSION_TIME) {
+                const stillValid = token && time && (Date.now() - parseInt(time, 10)) < MAX_SESSION_TIME;
+                if (!stillValid) {
                     window.location.replace('/comm-tracker/');
                 }
             }, 30000);
@@ -64,8 +71,48 @@
             /* Hide content by default until authentication is verified */
             visibility: hidden;
         }
+        body.locked {
+            visibility: visible;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         body.authenticated {
             visibility: visible;
+        }
+        .auth-locked {
+            display: none;
+            flex-direction: column;
+            gap: 12px;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            padding: 32px;
+            border-radius: 16px;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+            max-width: 420px;
+            text-align: center;
+        }
+        .auth-locked h1 {
+            font-size: 22px;
+            color: #2d3748;
+        }
+        .auth-locked p {
+            color: #718096;
+            font-size: 15px;
+            line-height: 1.5;
+        }
+        .auth-locked a {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.25);
         }
         .container {
             max-width: 1200px;
@@ -561,7 +608,15 @@
     </style>
 </head>
 <body>
-    <div id="root"></div>
+    <div id="auth-locked" class="auth-locked">
+        <div style="font-size: 48px;">🔒</div>
+        <h1>Access Restricted</h1>
+        <p>For your privacy, the commission tracker can only be opened from the password-protected portal.</p>
+        <a href="/comm-tracker/">Go to login</a>
+    </div>
+    <div id="app-shell" style="display: none;">
+        <div id="root"></div>
+    </div>
     <script type="text/babel">
         const { useState, useMemo, useEffect } = React;
 
