@@ -14,8 +14,8 @@ locale: "en-US"
 title: "My Personal Site"
 title_separator: "-"
 subtitle: # site tagline that appears below site title in masthead
-name: "Your Name"
-description: "My personal website and blog"
+name: "Rafa"
+description: "Just another plant hoarding, gadget tinkering, guitar attempting, tattooed and always curious human wandering the internet"
 url: "https://notmastema.github.io" # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: "NotMastema/NotMastema.github.io"
@@ -27,14 +27,14 @@ words_per_minute: 200
 
 # Site Author
 author:
-  name: "Your Name"
+  name: "Rafa"
   avatar: "/assets/images/IMG_0201.jpg"
-  bio: "I am a **developer** and this is my personal site."
+  bio: "I am Rafael. I work in tech and spend most of my free time with my dogs Zeus and Odin, playing guitar, taking care of my plants, trying new hardware setups, or gaming. I like learning, building, and experimenting. This site is a place for my projects, notes, and whatever else I feel like sharing."
   location: "Somewhere"
   links:
-    - label: "Email"
+    - label: "Gmail"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:your.email@example.com"
+      url: "mailto:rafaelsemail@gmail.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://notmastema.github.io"
