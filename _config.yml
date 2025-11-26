@@ -7,7 +7,7 @@
 
 # Theme Settings
 remote_theme: mmistakes/minimal-mistakes@4.26.2
-minimal_mistakes_skin: "default" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+minimal_mistakes_skin: "dark" # "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale: "en-US"
@@ -27,14 +27,14 @@ words_per_minute: 200
 
 # Site Author
 author:
-  name: "Your Name"
+  name: "Rafa"
   avatar: # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio: "I am a **developer** and this is my personal site."
+  bio: "Just another plant hoarding, gadget tinkering, guitar attempting, tattooed and always curious human wandering the internet"
   location: "Somewhere"
   links:
-    - label: "Email"
+    - label: "Gmail"
       icon: "fas fa-fw fa-envelope-square"
-      url: "mailto:your.email@example.com"
+      url: "mailto:rafaelsemail@gmail.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://notmastema.github.io"
