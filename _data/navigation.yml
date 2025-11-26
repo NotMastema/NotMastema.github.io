@@ -1,0 +1,6 @@
+# Main navigation links
+main:
+  - title: "Home"
+    url: /
+  - title: "Commission Tracker"
+    url: /comm-tracker/
