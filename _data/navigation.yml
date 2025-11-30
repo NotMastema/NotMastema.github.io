@@ -2,7 +2,5 @@
 main:
   - title: "Home"
     url: /
-  - title: "Commission Tracker"
-    url: https://tracker.rafaelmatas.com
-  - title: "Resume"
+  - title: "CV"
     url: https://rxresume.org/notmastema/overseas-selective-marsupial
