@@ -2,3 +2,5 @@
 main:
   - title: "Home"
     url: /
+  - title: "Commission Tracker"
+    url: https://tracker.rafaelmatas.com
