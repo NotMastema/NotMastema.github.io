@@ -16,7 +16,7 @@ title_separator: "-"
 subtitle: # site tagline that appears below site title in masthead
 name: "Rafa"
 description: "Just another plant hoarding, gadget tinkering, guitar attempting, tattooed and always curious human wandering the internet"
-url: "https://notmastema.github.io" # the base hostname & protocol for your site
+url: "https://rafaelmatas.com" # the base hostname & protocol for your site
 baseurl: "" # the subpath of your site, e.g. "/blog"
 repository: "NotMastema/NotMastema.github.io"
 teaser: # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -56,7 +56,7 @@ footer:
       url: "https://github.com/NotMastema"
     - label: "Commission Tracker"
       icon: "fas fa-fw fa-lock"
-      url: "/comm-tracker/"
+      url: "https://tracker.rafaelmatas.com"
 
 # Reading Files
 include:
