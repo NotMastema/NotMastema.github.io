@@ -43,7 +43,7 @@ author:
       url: "https://twitter.com/yourusername"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/NotMastema"
+      url: "https://rafaelmatas.com"
 
 # Site Footer
 footer:
@@ -54,7 +54,7 @@ footer:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
       url: "https://github.com/NotMastema"
-    - label: "Commission Tracker"
+    - label: "$"
       icon: "fas fa-fw fa-lock"
       url: "https://tracker.rafaelmatas.com"
 
