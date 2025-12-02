@@ -1,8 +1,8 @@
 ---
-layout: post
+layout: single
 title: "Yes, I Mix Nutrients Like I'm Growing Weed. They're Houseplants."
 date: 2025-12-02
-categories: [plants, hobbies]
+categories: [hobbies, plants]
 ---
 
 I turned into a plant person by accident, which is how most people become plant people. Nobody wakes up one morning and decides to optimize nutrient ratios for their monstera collection. It happens gradually. First you buy one plant because it looked nice at the store. Then somehow you don't kill it, which gives you false confidence. Then you buy seventeen more plants, build a spreadsheet, and start having opinions about pumice versus perlite.
